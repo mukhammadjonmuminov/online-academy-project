@@ -1,18 +1,14 @@
 from django.db import models
-
-class Status:
-    class Roles(models.TextChoices):
-        DRAFT = 'df', 'Draft'
-        PUBLISHED = 'pb', 'Published'
+from .helpers import SaveImages, Status
 
 class Teacher(models.Model):
     full_name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
-    image = models.ImageField(upload_to='app/teachers/images/')
+    image = models.ImageField(upload_to=SaveImages.teacher_images_path)
     degree = models.CharField(max_length=255)
     date_birth = models.DateTimeField()
     work_company = models.CharField(max_length=100)
-    work_company_logo = models.ImageField(upload_to='app/teachers/work_company_logo/')
+    work_company_logo = models.ImageField(upload_to=SaveImages.work_company_logo)
 
     class Meta:
         ordering = ['id']
@@ -22,13 +18,8 @@ class Teacher(models.Model):
 
 class Task(models.Model):
 
-    class Difficulty(models.TextChoices):
-        EASY = 'e', 'Easy'
-        MEDIUM = 'm', 'Medium'
-        HARD = 'h', 'Hard'
-
     question = models.TextField()
-    difficulty = models.CharField(max_length=1, choices=Difficulty.choices, default=Difficulty.EASY)
+    difficulty = models.CharField(max_length=1, choices=Status.Difficulty.choices, default=Status.Difficulty.EASY)
     status = models.CharField(max_length=2, choices=Status.Roles.choices, default=Status.Roles.PUBLISHED)
 
     def __str__(self):
@@ -37,7 +28,7 @@ class Task(models.Model):
 class LessonPart(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
-    video = models.FileField(upload_to='app/lesson_part/videos/')
+    video = models.FileField(upload_to=SaveImages.video_gallery_path)
     status = models.CharField(max_length=2, choices=Status.Roles.choices, default=Status.Roles.PUBLISHED)
 
     class Meta:
@@ -53,8 +44,8 @@ class Lesson(models.Model):
     slug = models.SlugField(max_length=255)
     part = models.ManyToManyField(LessonPart, blank=True)
     task = models.ManyToManyField(Task, blank=True)
-    presentation_file = models.FileField(upload_to='app/lesson/presentation_file/', blank=True)
-    support_downloads = models.FileField(upload_to='app/lesson/support_downloads/', blank=True)
+    presentation_file = models.FileField(upload_to=SaveImages.presentation_file_path, blank=True)
+    support_downloads = models.FileField(upload_to=SaveImages.support_downloads_path, blank=True)
     status = models.CharField(max_length=2, choices=Status.Roles.choices, default=Status.Roles.PUBLISHED)
     created = models.DateTimeField(auto_now_add=True)
 
