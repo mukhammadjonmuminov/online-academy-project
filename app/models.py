@@ -6,7 +6,7 @@ class Teacher(models.Model):
     slug = models.SlugField(max_length=255)
     image = models.ImageField(upload_to=SaveImages.teacher_images_path)
     degree = models.CharField(max_length=255)
-    date_birth = models.DateTimeField()
+    date_birth = models.DateField()
     work_company = models.CharField(max_length=100)
     work_company_logo = models.ImageField(upload_to=SaveImages.work_company_logo)
 
