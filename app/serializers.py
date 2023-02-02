@@ -22,7 +22,7 @@ class LessonSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Lesson
-        fields = ['title', 'slug', 'part', 'task', 'presentation_file', 'support_downloads', 'status', 'created']
+        fields = ['id', 'title', 'slug', 'part', 'task', 'presentation_file', 'support_downloads', 'status', 'created']
 
 class ModuleSerializer(serializers.ModelSerializer):
 
@@ -39,7 +39,7 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ['id', 'title', 'slug', 'models', 'education_type', 'created', 'members', 'status']
+        fields = ['id', 'title', 'slug', 'modules', 'education_type', 'created', 'members', 'status']
 
 class SpecialitySerializer(serializers.ModelSerializer):
 

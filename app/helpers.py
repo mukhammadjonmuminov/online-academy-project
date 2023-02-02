@@ -1,29 +1,24 @@
 import uuid
 from django.db import models
 
-class SaveImages:
-    @staticmethod
-    def teacher_images_path(filename):
+class SaveImages(object):
+    def teacher_images_path(instance, filename):
         image_extension = filename.split('.')[-1]
         return f"app/image_gallery/teacher/{uuid.uuid4()}.{image_extension}"
 
-    @staticmethod
-    def work_company_logo(filename):
+    def work_company_logo(instance, filename):
         image_extension = filename.split('.')[-1]
         return f"app/lesson/image_gallery/{uuid.uuid4()}.{image_extension}"
 
-    @staticmethod
-    def video_gallery_path(filename):
+    def video_gallery_path(instance, filename):
         video_extension = filename.split('.')[-1]
         return f"app/lesson/video_gallery/{uuid.uuid4()}.{video_extension}"
 
-    @staticmethod
-    def presentation_file_path(filename):
+    def presentation_file_path(instance, filename):
         file_extension = filename.split('.')[-1]
         return f"app/lesson/presentation_file/{uuid.uuid4()}.{file_extension}"
 
-    @staticmethod
-    def support_downloads_path(filename):
+    def support_downloads_path(instance, filename):
             file_extension = filename.split('.')[-1]
             return f"app/lesson/support_downloads/{uuid.uuid4()}.{file_extension}"
 
