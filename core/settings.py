@@ -30,8 +30,6 @@ INSTALLED_APPS = [
     #app
     'app',
     'import_export',
-    'class',
-
 ]
 
 MIDDLEWARE = [
