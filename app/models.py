@@ -20,7 +20,7 @@ class Task(models.Model):
 
     question = models.TextField()
     difficulty = models.CharField(max_length=1, choices=Status.Difficulty.choices, default=Status.Difficulty.EASY)
-    status = models.CharField(max_length=2, choices=Status.Roles.choices, default=Status.Roles.PUBLISHED)
+    status = models.CharField(max_length=2, choices=Status.PublishRoles.choices, default=Status.PublishRoles.PUBLISHED)
 
     def __str__(self):
         return self.id
@@ -29,7 +29,7 @@ class LessonPart(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
     video = models.FileField(upload_to=SaveImages.video_gallery_path)
-    status = models.CharField(max_length=2, choices=Status.Roles.choices, default=Status.Roles.PUBLISHED)
+    status = models.CharField(max_length=2, choices=Status.PublishRoles.choices, default=Status.PublishRoles.PUBLISHED)
 
     class Meta:
         ordering = ['id']
@@ -46,7 +46,7 @@ class Lesson(models.Model):
     task = models.ManyToManyField(Task, blank=True)
     presentation_file = models.FileField(upload_to=SaveImages.presentation_file_path, blank=True)
     support_downloads = models.FileField(upload_to=SaveImages.support_downloads_path, blank=True)
-    status = models.CharField(max_length=2, choices=Status.Roles.choices, default=Status.Roles.PUBLISHED)
+    status = models.CharField(max_length=2, choices=Status.PublishRoles.choices, default=Status.PublishRoles.PUBLISHED)
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -65,7 +65,7 @@ class Module(models.Model):
     price = models.PositiveIntegerField()
     support_day = models.PositiveIntegerField(default=45)
     members = models.PositiveIntegerField(default=0)
-    status = models.CharField(max_length=2, choices=Status.Roles.choices, default=Status.Roles.PUBLISHED)
+    status = models.CharField(max_length=2, choices=Status.PublishRoles.choices, default=Status.PublishRoles.PUBLISHED)
 
     class Meta:
         ordering = ['id']
@@ -76,17 +76,14 @@ class Module(models.Model):
         return self.title
 
 class Course(models.Model):
-    class Roles(models.TextChoices):
-        ON = 'on', 'Online'
-        OFF = 'off', 'Offline'
 
     title = models.CharField(max_length=150)
     slug = models.SlugField(max_length=150)
     modules = models.ManyToManyField(Module, blank=True)
-    education_type = models.CharField(max_length=3, choices=Roles.choices, default=Roles.ON)
+    education_type = models.CharField(max_length=3, choices=Status.CourseRoles.choices, default=Status.CourseRoles.ON)
     created = models.DateField(auto_now_add=True)
     members = models.PositiveIntegerField(default=0)
-    status = models.CharField(max_length=2, choices=Status.Roles.choices, default=Status.Roles.PUBLISHED)
+    status = models.CharField(max_length=2, choices=Status.PublishRoles.choices, default=Status.PublishRoles.PUBLISHED)
 
     class Meta:
         ordering = ['id']
@@ -100,14 +97,13 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
-
 class Speciality(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
     description = models.TextField()
     courses = models.ManyToManyField(Course)
     members = models.PositiveIntegerField(default=0)
-    status = models.CharField(max_length=2, choices=Status.Roles.choices, default=Status.Roles.PUBLISHED)
+    status = models.CharField(max_length=2, choices=Status.PublishRoles.choices, default=Status.PublishRoles.PUBLISHED)
 
     class Meta:
         ordering = ['id']

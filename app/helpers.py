@@ -24,7 +24,7 @@ class SaveImages(object):
 
 
 class Status:
-    class Roles(models.TextChoices):
+    class PublishRoles(models.TextChoices):
         DRAFT = 'df', 'Draft'
         PUBLISHED = 'pb', 'Published'
 
@@ -32,5 +32,10 @@ class Status:
         EASY = 'e', 'Easy'
         MEDIUM = 'm', 'Medium'
         HARD = 'h', 'Hard'
+
+    class CourseRoles(models.TextChoices):
+        ON = 'on', 'Online'
+        OFF = 'off', 'Offline'
+
 
 
