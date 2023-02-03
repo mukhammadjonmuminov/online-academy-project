@@ -27,7 +27,7 @@ class SpecialtyAdmin(ImportExportActionModelAdmin):
         return obj.courses.all().count()
 
 @admin.register(Course)
-class CourseAdmin(admin.ModelAdmin):
+class CourseAdmin(ImportExportActionModelAdmin):
     list_display = ['id', 'title', 'slug', 'modules_count', 'education_type', 'members', 'status', 'created']
     list_display_links = ['id', 'title', 'slug', 'modules_count', 'education_type', 'members', 'status', 'created']
     prepopulated_fields = {'slug': ('title', )}
@@ -38,7 +38,7 @@ class CourseAdmin(admin.ModelAdmin):
         return obj.modules.all().count()
 
 @admin.register(Module)
-class ModuleAdmin(admin.ModelAdmin):
+class ModuleAdmin(ImportExportActionModelAdmin):
     list_display = ['id', 'title', 'slug', 'lessons_count', 'teacher', 'price', 'support_day', 'members', 'status']
     list_display_links = ['id', 'title', 'slug', 'lessons_count', 'teacher', 'price', 'support_day', 'members', 'status']
     list_filter = ['status', ]
@@ -49,7 +49,7 @@ class ModuleAdmin(admin.ModelAdmin):
         return obj.lessons.all().count()
 
 @admin.register(Lesson)
-class LessonAdmin(admin.ModelAdmin):
+class LessonAdmin(ImportExportActionModelAdmin):
     list_display = ['id', 'title', 'slug', 'part_count', 'task_count', 'presentation_file', 'support_downloads',  'status', 'created']
     list_display_links = ['id', 'title', 'slug', 'part_count', 'task_count', 'presentation_file', 'support_downloads',  'status', 'created']
     prepopulated_fields = {'slug': ('title', )}
@@ -68,7 +68,7 @@ class LessonPartAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title', )}
 
 @admin.register(Teacher)
-class TeacherAdmin(admin.ModelAdmin):
+class TeacherAdmin(ImportExportActionModelAdmin):
     list_display = ['id', 'full_name', 'slug', 'image', 'degree', 'date_birth', 'work_company', 'work_company_logo']
     list_display_links = ['id', 'full_name', 'slug', 'image', 'degree', 'date_birth', 'work_company', 'work_company_logo']
     search_fields = ['full_name', 'company']

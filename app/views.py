@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from .models import Task, Teacher, LessonPart, Lesson, Module, Course, Speciality
-from .serializers import TaskSerializer, TeacherSerializer, LessonSerializer, LessonPartSerializer, ModuleSerializer, CourseSerializer, SpecialitySerializer
 from rest_framework.pagination import LimitOffsetPagination
+from .serializers import TaskSerializer, TeacherSerializer, LessonSerializer, LessonPartSerializer, ModuleSerializer, CourseSerializer, SpecialitySerializer
 # from rest_framework.authentication import TokenAuthentication
 # from rest_framework.permissions import IsAuthenticated
 from rest_framework import filters
